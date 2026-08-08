@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindScore — Student Mental Health Predictor</title>
+  <meta name="description" content="Predict student mental health scores based on social media usage, study habits, and lifestyle factors using machine learning." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/frontend/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════  BACKGROUND BLOBS  ═══════════════════ -->
+  <div class="bg-blobs" aria-hidden="true">
+    <span class="blob blob--1"></span>
+    <span class="blob blob--2"></span>
+    <span class="blob blob--3"></span>
+  </div>
+
+  <!-- ═══════════════════  HEADER  ═══════════════════ -->
+  <header class="header">
+    <div class="header__brand">
+      <svg class="header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+      </svg>
+      <h1 class="header__title">MindScore</h1>
+    </div>
+    <p class="header__tagline">AI-Powered Student Mental Health Predictor</p>
+  </header>
+
+  <!-- ═══════════════════  MAIN — TWO-PANEL LAYOUT  ═══════════════════ -->
+  <main class="main">
+    <div class="panels">
+
+      <!-- ════════  LEFT PANEL: INPUT FORM  ════════ -->
+      <div class="panel panel--input">
+        <div class="panel__header">
+          <svg class="panel__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <h2 class="panel__title">Input Data</h2>
+        </div>
+        <p class="panel__subtitle">Fill in the student details below</p>
+
+        <form id="prediction-form" class="form-card" novalidate>
+
+          <!-- SECTION: Personal Info -->
+          <fieldset class="form-section">
+            <legend class="form-section__legend">
+              <span class="legend-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              Personal Information
+            </legend>
+
+            <div class="form-grid">
+              <!-- Age -->
+              <div class="form-group">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" id="age" name="age" class="form-input" min="10" max="100" placeholder="e.g. 21" required />
+                <span class="form-hint">10 – 100</span>
+              </div>
+
+              <!-- Gender -->
+              <div class="form-group">
+                <label for="gender" class="form-label">Gender</label>
+                <select id="gender" name="gender" class="form-input" required>
+                  <option value="" disabled selected>Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+
+              <!-- Country -->
+              <div class="form-group">
+                <label for="country" class="form-label">Country</label>
+                <select id="country" name="country" class="form-input" required>
+                  <option value="" disabled selected>Select country</option>
+                  <option value="India">India</option>
+                  <option value="USA">USA</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Australia">Australia</option>
+                  <option value="UK">UK</option>
+                  <option value="Germany">Germany</option>
+                  <option value="Mexico">Mexico</option>
+                  <option value="Turkey">Turkey</option>
+                  <option value="France">France</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <!-- Academic Level -->
+              <div class="form-group">
+                <label for="academic_level" class="form-label">Academic Level</label>
+                <select id="academic_level" name="academic_level" class="form-input" required>
+                  <option value="" disabled selected>Select level</option>
+                  <option value="High School">High School</option>
+                  <option value="Undergraduate">Undergraduate</option>
+                  <option value="Graduate">Graduate</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- SECTION: Social Media -->
+          <fieldset class="form-section">
+            <legend class="form-section__legend">
+              <span class="legend-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </span>
+              Social Media Usage
+            </legend>
+
+            <div class="form-grid">
+              <!-- Most Used Platform -->
+              <div class="form-group">
+                <label for="most_used_platform" class="form-label">Most Used Platform</label>
+                <select id="most_used_platform" name="most_used_platform" class="form-input" required>
+                  <option value="" disabled selected>Select platform</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="Instagram">Instagram</option>
+                  <option value="Twitter">Twitter</option>
+                  <option value="YouTube">YouTube</option>
+                  <option value="TikTok">TikTok</option>
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="Snapchat">Snapchat</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="WeChat">WeChat</option>
+                  <option value="LINE">LINE</option>
+                  <option value="KakaoTalk">KakaoTalk</option>
+                  <option value="VKontakte">VKontakte</option>
+                </select>
+              </div>
+
+              <!-- Purpose of Use -->
+              <div class="form-group">
+                <label for="purpose_of_use" class="form-label">Purpose of Use</label>
+                <select id="purpose_of_use" name="purpose_of_use" class="form-input" required>
+                  <option value="" disabled selected>Select purpose</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Education">Education</option>
+                  <option value="Networking">Networking</option>
+                  <option value="News">News</option>
+                </select>
+              </div>
+
+              <!-- Avg Daily Usage -->
+              <div class="form-group">
+                <label for="avg_daily_usage_hours" class="form-label">Avg Daily Usage (hrs)</label>
+                <input type="number" id="avg_daily_usage_hours" name="avg_daily_usage_hours" class="form-input" min="0" max="24" step="0.5" placeholder="e.g. 4.5" required />
+                <span class="form-hint">0 – 24 hours</span>
+              </div>
+
+              <!-- Daily Unlocks -->
+              <div class="form-group">
+                <label for="daily_unlocks" class="form-label">Daily Phone Unlocks</label>
+                <input type="number" id="daily_unlocks" name="daily_unlocks" class="form-input" min="0" placeholder="e.g. 80" required />
+                <span class="form-hint">≥ 0</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- SECTION: Lifestyle -->
+          <fieldset class="form-section">
+            <legend class="form-section__legend">
+              <span class="legend-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+              </span>
+              Lifestyle &amp; Wellbeing
+            </legend>
+
+            <div class="form-grid">
+              <!-- Study Hours -->
+              <div class="form-group">
+                <label for="study_hours" class="form-label">Study Hours / Day</label>
+                <input type="number" id="study_hours" name="study_hours" class="form-input" min="0" max="24" step="0.5" placeholder="e.g. 5" required />
+                <span class="form-hint">0 – 24 hours</span>
+              </div>
+
+              <!-- Physical Activity -->
+              <div class="form-group">
+                <label for="physical_activity_hours" class="form-label">Physical Activity (hrs)</label>
+                <input type="number" id="physical_activity_hours" name="physical_activity_hours" class="form-input" min="0" max="4" step="0.1" placeholder="e.g. 1.0" required />
+                <span class="form-hint">0 – 4 hours</span>
+              </div>
+
+              <!-- Sleep Hours -->
+              <div class="form-group">
+                <label for="sleep_hours_per_night" class="form-label">Sleep Hours / Night</label>
+                <input type="number" id="sleep_hours_per_night" name="sleep_hours_per_night" class="form-input" min="0" max="24" step="0.5" placeholder="e.g. 7" required />
+                <span class="form-hint">0 – 24 hours</span>
+              </div>
+
+              <!-- Stress Level -->
+              <div class="form-group">
+                <label for="stress_level" class="form-label">Stress Level</label>
+                <select id="stress_level" name="stress_level" class="form-input" required>
+                  <option value="" disabled selected>Select level</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                  <option value="Very High">Very High</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Submit -->
+          <button type="submit" id="submit-btn" class="btn btn--primary">
+            <span class="btn__text">
+              <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Predict Score
+            </span>
+            <span class="btn__loader" aria-hidden="true">
+              <span class="spinner"></span>
+              Analyzing…
+            </span>
+          </button>
+        </form>
+      </div>
+
+      <!-- ════════  RIGHT PANEL: OUTPUT / SPEEDOMETER  ════════ -->
+      <div class="panel panel--output">
+        <div class="panel__header">
+          <svg class="panel__header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <h2 class="panel__title">Prediction</h2>
+        </div>
+        <p class="panel__subtitle">Your mental health score will appear here</p>
+
+        <!-- Idle State -->
+        <div id="output-idle" class="output-state output-idle">
+          <div class="idle-gauge-wrapper">
+            <svg class="speedometer-svg" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+              <!-- Gauge background arc -->
+              <path d="M 30 170 A 120 120 0 0 1 270 170" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="22" stroke-linecap="round"/>
+              <!-- Tick marks -->
+              <g class="gauge-ticks" opacity="0.3">
+                <line x1="42" y1="142" x2="52" y2="136" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="60" y1="95"  x2="70" y2="95"  stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="100" y1="60" x2="106" y2="68" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="150" y1="50" x2="150" y2="60" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="200" y1="60" x2="194" y2="68" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="240" y1="95" x2="230" y2="95" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="258" y1="142" x2="248" y2="136" stroke="#94a3b8" stroke-width="1.5"/>
+              </g>
+              <!-- Needle (centered / idle) -->
+              <line x1="150" y1="170" x2="150" y2="72" stroke="#475569" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+              <circle cx="150" cy="170" r="8" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+            </svg>
+          </div>
+          <p class="idle-text">Awaiting prediction…</p>
+          <p class="idle-hint">Fill in the form and click <strong>Predict Score</strong></p>
+        </div>
+
+        <!-- Result State -->
+        <div id="output-result" class="output-state output-result output-state--hidden">
+          <!-- Speedometer Gauge -->
+          <div class="gauge-wrapper">
+            <svg id="speedometer" class="speedometer-svg" viewBox="0 0 300 210" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="gaugeGradGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#34d399"/>
+                  <stop offset="100%" stop-color="#6ee7b7"/>
+                </linearGradient>
+                <linearGradient id="gaugeGradYellow" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#fbbf24"/>
+                  <stop offset="100%" stop-color="#f59e0b"/>
+                </linearGradient>
+                <linearGradient id="gaugeGradRed" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#fb923c"/>
+                  <stop offset="100%" stop-color="#ef4444"/>
+                </linearGradient>
+                <filter id="glowFilter">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+                <filter id="needleShadow">
+                  <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.5)"/>
+                </filter>
+              </defs>
+
+              <!-- Background arc -->
+              <path d="M 30 175 A 120 120 0 0 1 270 175" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="24" stroke-linecap="round"/>
+
+              <!-- Red zone (0-3): ~0° to ~54° of 180° arc — low score = high risk -->
+              <path d="M 30 175 A 120 120 0 0 1 82.15 91.54" fill="none" stroke="url(#gaugeGradRed)" stroke-width="24" stroke-linecap="round" opacity="0.85"/>
+
+              <!-- Yellow zone (3-6): ~54° to ~108° -->
+              <path d="M 82.15 91.54 A 120 120 0 0 1 217.85 91.54" fill="none" stroke="url(#gaugeGradYellow)" stroke-width="24" stroke-linecap="round" opacity="0.85"/>
+
+              <!-- Green zone (6-10): ~108° to ~180° — high score = healthy -->
+              <path d="M 217.85 91.54 A 120 120 0 0 1 270 175" fill="none" stroke="url(#gaugeGradGreen)" stroke-width="24" stroke-linecap="round" opacity="0.85"/>
+
+              <!-- Tick marks & labels -->
+              <g class="gauge-ticks" opacity="0.5">
+                <!-- 0 -->
+                <line x1="30" y1="175" x2="40" y2="175" stroke="#e2e8f0" stroke-width="2"/>
+                <text x="22" y="192" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">0</text>
+                <!-- 2 -->
+                <line x1="51" y1="117" x2="60" y2="122" stroke="#e2e8f0" stroke-width="1.5"/>
+                <text x="40" y="112" fill="#94a3b8" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">2</text>
+                <!-- 4 -->
+                <line x1="105" y1="68" x2="111" y2="76" stroke="#e2e8f0" stroke-width="1.5"/>
+                <text x="96" y="62" fill="#94a3b8" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">4</text>
+                <!-- 5 -->
+                <line x1="150" y1="55" x2="150" y2="65" stroke="#e2e8f0" stroke-width="2"/>
+                <text x="150" y="48" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">5</text>
+                <!-- 6 -->
+                <line x1="195" y1="68" x2="189" y2="76" stroke="#e2e8f0" stroke-width="1.5"/>
+                <text x="204" y="62" fill="#94a3b8" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">6</text>
+                <!-- 8 -->
+                <line x1="249" y1="117" x2="240" y2="122" stroke="#e2e8f0" stroke-width="1.5"/>
+                <text x="260" y="112" fill="#94a3b8" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">8</text>
+                <!-- 10 -->
+                <line x1="270" y1="175" x2="260" y2="175" stroke="#e2e8f0" stroke-width="2"/>
+                <text x="278" y="192" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">10</text>
+              </g>
+
+              <!-- Zone labels -->
+              <text x="58" y="155" fill="#f87171" font-size="9" font-weight="600" text-anchor="middle" font-family="Inter, sans-serif" opacity="0.7">HIGH RISK</text>
+              <text x="150" y="88" fill="#fbbf24" font-size="9" font-weight="600" text-anchor="middle" font-family="Inter, sans-serif" opacity="0.7">MODERATE</text>
+              <text x="242" y="155" fill="#34d399" font-size="9" font-weight="600" text-anchor="middle" font-family="Inter, sans-serif" opacity="0.7">HEALTHY</text>
+
+              <!-- Needle group — rotates around center (150, 175) -->
+              <g id="gauge-needle" filter="url(#needleShadow)" style="transform-origin: 150px 175px; transform: rotate(-90deg); transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                <polygon points="146,175 150,62 154,175" fill="#e2e8f0" opacity="0.9"/>
+                <circle cx="150" cy="175" r="10" fill="#1e293b" stroke="#6366f1" stroke-width="3"/>
+                <circle cx="150" cy="175" r="4" fill="#6366f1"/>
+              </g>
+
+              <!-- Center score display -->
+              <text id="gauge-score-text" x="150" y="208" fill="#e2e8f0" font-size="14" font-weight="700" text-anchor="middle" font-family="Inter, sans-serif">—</text>
+            </svg>
+          </div>
+
+          <!-- Score Details -->
+          <div class="score-details">
+            <p class="score-details__label">Estimated Mental Health Score</p>
+            <p class="score-details__value" id="score-value">—</p>
+            <div class="score-details__badge-row">
+              <span class="interp-badge" id="score-badge"></span>
+            </div>
+            <p class="score-details__interpretation" id="score-interpretation"></p>
+          </div>
+
+          <button type="button" id="reset-btn" class="btn btn--ghost">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Run Another Prediction
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Error Toast ── -->
+    <div id="error-toast" class="toast toast--hidden" role="alert">
+      <svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p class="toast__message" id="error-message"></p>
+      <button type="button" class="toast__close" id="toast-close" aria-label="Dismiss">&times;</button>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════════  FOOTER  ═══════════════════ -->
+  <footer class="footer">
+    <p>&copy; 2026 MindScore &mdash; Built with FastAPI &amp; Machine Learning</p>
+  </footer>
+
+  <script src="/frontend/script.js"></script>
+</body>
+</html>

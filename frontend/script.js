@@ -6,7 +6,7 @@
   'use strict';
 
   // ── Configuration ──
-  const API_URL = 'https://mental-health-score-czy0.onrender.com';
+  const API_URL = 'https://mental-health-score-czy0.onrender.com/predict';
 
   // ── DOM References ──
   const form         = document.getElementById('prediction-form');
